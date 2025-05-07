@@ -88,33 +88,6 @@ if model_choice == "HIV Prediction":
             else:
                 st.markdown("<h3 style='color:blue;'>There is a low likelihood of HIV infection.</h3>", unsafe_allow_html=True)
 
-    if show_metrics:
-    st.subheader("Model Evaluation")
-    try:
-        # Import here if not already imported at the top
-        import pandas as pd
-
-        # Load test dataset
-        df_test = pd.read_csv("hiv_test_data.csv")  # Make sure this file is in the same folder
-
-        X_test = df_test.drop("HIV Test result", axis=1)
-        y_test = df_test["HIV Test result"]
-
-        y_pred = model.predict(X_test)
-        acc = accuracy_score(y_test, y_pred)
-        cm = confusion_matrix(y_test, y_pred)
-
-        st.write(f"Accuracy Score: {acc:.2f}")
-
-        fig, ax = plt.subplots()
-        ConfusionMatrixDisplay(cm, display_labels=["Negative", "Positive"]).plot(ax=ax)
-        st.pyplot(fig)
-
-    except Exception as e:
-        st.error(f"Error loading or displaying metrics: {e}")
-
-
-
 
 
 # Hepatitis B Prediction UI
