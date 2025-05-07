@@ -91,22 +91,24 @@ if model_choice == "HIV Prediction":
     if show_metrics:
         st.subheader("Model Evaluation")
         try:
-            df = pd.read_csv("your_cleaned_hiv_dataset.csv")  # Replace with actual dataset
-            X = df.drop("HIV Test result", axis=1)
-            y = df["HIV Test result"]
-            from sklearn.model_selection import train_test_split
-            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-            y_pred = hiv_model.predict(X_test)
-            acc = accuracy_score(y_test, y_pred)
-            cm = confusion_matrix(y_test, y_pred)
+    # Load test dataset
+    df_test = pd.read_csv("hiv_test_data.csv")  # File saved in your notebook step
 
-            st.write(f"Accuracy Score: **{acc:.2f}**")
-            fig, ax = plt.subplots()
-            ConfusionMatrixDisplay(cm, display_labels=["Negative", "Positive"]).plot(ax=ax)
-            st.pyplot(fig)
+    X_test = df_test.drop("HIV Test result", axis=1)
+    y_test = df_test["HIV Test result"]
 
-        except Exception as e:
-            st.error(f"Error loading dataset: {e}")
+    y_pred = model.predict(X_test)
+    acc = accuracy_score(y_test, y_pred)
+    cm = confusion_matrix(y_test, y_pred)
+
+    st.write(f"Accuracy Score: {acc:.2f}")
+
+    fig, ax = plt.subplots()
+    ConfusionMatrixDisplay(cm, display_labels=["Negative", "Positive"]).plot(ax=ax)
+    st.pyplot(fig)
+
+except Exception as e:
+    st.error(f"Error loading or displaying metrics: {e}")
 
 # Hepatitis B Prediction UI
 elif model_choice == "Hepatitis B Prediction":
