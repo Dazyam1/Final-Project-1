@@ -91,10 +91,6 @@ if model_choice == "HIV Prediction":
     if show_metrics:
         st.subheader("Model Evaluation")
         try:
-    import pandas as pd
-    from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
-    import matplotlib.pyplot as plt
-
     # Load test dataset
     df_test = pd.read_csv("hiv_test_data.csv")  # Make sure this CSV file exists in the same directory
 
