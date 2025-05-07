@@ -92,7 +92,10 @@ if model_choice == "HIV Prediction":
         st.subheader("Model Evaluation")
         try:
     # Load test dataset
-    df_test = pd.read_csv("hiv_test_data.csv")  # File saved in your notebook step
+    import pandas as pd
+    from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
+
+    df_test = pd.read_csv("hiv_test_data.csv")  # Ensure this file exists in your project folder
 
     X_test = df_test.drop("HIV Test result", axis=1)
     y_test = df_test["HIV Test result"]
@@ -103,12 +106,14 @@ if model_choice == "HIV Prediction":
 
     st.write(f"Accuracy Score: {acc:.2f}")
 
+    import matplotlib.pyplot as plt
     fig, ax = plt.subplots()
     ConfusionMatrixDisplay(cm, display_labels=["Negative", "Positive"]).plot(ax=ax)
     st.pyplot(fig)
 
 except Exception as e:
     st.error(f"Error loading or displaying metrics: {e}")
+
 
 # Hepatitis B Prediction UI
 elif model_choice == "Hepatitis B Prediction":
