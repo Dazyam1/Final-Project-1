@@ -91,8 +91,11 @@ if model_choice == "HIV Prediction":
     if show_metrics:
     st.subheader("Model Evaluation")
     try:
+        # Import here if not already imported at the top
+        import pandas as pd
+
         # Load test dataset
-        df_test = pd.read_csv("hiv_test_data.csv")  # Make sure this CSV file exists in the same directory
+        df_test = pd.read_csv("hiv_test_data.csv")  # Make sure this file is in the same folder
 
         X_test = df_test.drop("HIV Test result", axis=1)
         y_test = df_test["HIV Test result"]
@@ -109,6 +112,7 @@ if model_choice == "HIV Prediction":
 
     except Exception as e:
         st.error(f"Error loading or displaying metrics: {e}")
+
 
 
 
