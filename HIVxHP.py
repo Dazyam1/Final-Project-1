@@ -31,7 +31,7 @@ def load_model(path):
     return joblib.load(path)
 
 hiv_model = load_model("hiv_prediction_model.pkl")
-hep_model = load_model("hepatitis_model_lr.pkl")
+hep_model = load_model("hepatitis_model_final.pkl")
 
 # Common options
 nigerian_states = [
